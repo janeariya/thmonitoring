@@ -24,6 +24,7 @@
 </head>
 <body> 
   Welcome to User Page! <br>
+  <h1><?php echo $objResult["Username"];?></h1>
   <table border="1" style="width: 300px">
     <tbody>
       <tr>
