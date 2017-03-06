@@ -37,17 +37,35 @@ body {font-size:16px;}
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
-  
-  <!-- progress -->
-  <div class="w3-container" id="progress" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Progress.</b></h1>
+
+  <!-- Add trainee -->
+  <div class="w3-container" id="addTrainee" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Add Trainee.</b></h1>
     <hr style="width:50px;border:5px solid #607d8b" class="w3-round">
-    <p>The best team in the world.</p>
-    <p>We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
-    <p><b>Our designers are thoughtfully chosen</b>:</p>
+    <p>Add information about your trainee!</p>
+    <form action="/action_page.php" target="_blank">
+      <div class="w3-group">
+        <label>Name</label>
+        <input class="w3-input w3-border" type="text" name="Name" required>
+      </div>
+      <div class="w3-group">
+        <label>Gender</label>
+        <input class="w3-input w3-border" type="text" name="Gender" required>
+      </div>
+      <div class="w3-group">
+        <label>Weight</label>
+        <input class="w3-input w3-border" type="text" name="Weight" required>
+      </div>
+      <div class="w3-group">
+        <label>Height</label>
+        <input class="w3-input w3-border" type="text" name="Height" required>
+      </div>
+      <div class="w3-group">
+        <label>Age</label>
+        <input class="w3-input w3-border" type="text" name="Age" required>
+      </div>
+      <button type="submit" class="w3-btn-block w3-padding-large w3-blue-grey w3-margin-bottom">Add Trainee</button>
+    </form>  
   </div>
 
 <!-- End page content -->

@@ -18,7 +18,7 @@ body {font-size:16px;}
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-padding-xlarge w3-hide-large w3-display-topleft w3-hover-white" style="width:100%;font-size:22px">Close Menu</a>
   <div class="w3-container">
     <h3 class="w3-padding-64"><b>Health<br>Monitoring</b></h3>
-  </div>
+  </div> 
   <a href="https://webmonitoring.mybluemix.net/home.php#home" onclick="w3_close()" class="w3-padding w3-hover-white">Home</a> 
   <a href="https://webmonitoring.mybluemix.net/monitoring.php#monitoring" onclick="w3_close()" class="w3-padding w3-hover-white">Monitoring</a> 
   <a href="https://webmonitoring.mybluemix.net/progress.php#progress" onclick="w3_close()" class="w3-padding w3-hover-white">Progress</a> 
@@ -37,18 +37,14 @@ body {font-size:16px;}
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
-  
-  <!-- progress -->
-  <div class="w3-container" id="progress" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Progress.</b></h1>
+
+  <!-- Home -->
+  <div class="w3-container" style="margin-top:80px" id="home">
+    <!--<h1 class="w3-jumbo"><b>Interior Design</b></h1>-->
+    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Home.</b></h1>
     <hr style="width:50px;border:5px solid #607d8b" class="w3-round">
-    <p>The best team in the world.</p>
-    <p>We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
-    <p><b>Our designers are thoughtfully chosen</b>:</p>
   </div>
+  
 
 <!-- End page content -->
 
