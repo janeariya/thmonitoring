@@ -32,7 +32,7 @@
 			}
 			else
 			{
-				header("location:user_page.php");
+				header("location:home.php");
 			}
 	}
 	mysqli_close($condb);
