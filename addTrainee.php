@@ -24,6 +24,7 @@ body {font-size:16px;}
   <a href="/progress.php#progress" onclick="w3_close()" class="w3-padding w3-hover-white">Progress</a> 
   <a href="/traineeInfo.php#traineeInfo" onclick="w3_close()" class="w3-padding w3-hover-white">Trainee Info</a> 
   <a href="/addTrainee.php#addTrainee" onclick="w3_close()" class="w3-padding w3-hover-white">Add Trainee</a>
+  <a href="/logout.php" onclick="w3_close()" class="w3-padding w3-hover-white">Logout</a>
 </nav>
 
 <!-- Top menu on small screens -->

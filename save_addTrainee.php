@@ -1,5 +1,6 @@
+Warisara
 <?php
-	seesion_start();
+//	seesion_start();
 //	if($_SESSION['UserID'] == "")
 //	{
 //		echo "Please Login!";
@@ -49,7 +50,9 @@
 	echo $newMax;
 	
 	
-	
+	$strSQL = "SELECT * FROM trainee WHERE trainee_name = '".trim($_POST['Name'])."' ";
+	$objQuery = mysqli_query($condb,$strSQL);
+	$objResult = mysqli_fetch_array($objQuery);
 	if($objResult)
 	{
 			echo "Username already exists!";
