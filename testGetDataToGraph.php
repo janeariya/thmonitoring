@@ -6,4 +6,6 @@
 		$objQuery = mysqli_query($condb,$strSQL);
 	$objResult = mysqli_fetch_array($objQuery);
 	echo $objResult["trainee_hr"]
+	
+	mysqli_close($condb);
 ?>

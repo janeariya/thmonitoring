@@ -5,6 +5,8 @@
 	$strSQL = "SELECT Name FROM customer order by CustomerID DESC LIMIT 1";
 		$objQuery = mysqli_query($condb,$strSQL);
 	$objResult = mysqli_fetch_array($objQuery);
+	
+	mysqli_close($condb);
 ?>
 <html>
 <head>

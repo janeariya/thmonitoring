@@ -24,7 +24,6 @@ body {font-size:16px;}
   <a href="/progress.php#progress" onclick="w3_close()" class="w3-padding w3-hover-white">Progress</a> 
   <a href="/traineeInfo.php#traineeInfo" onclick="w3_close()" class="w3-padding w3-hover-white">Trainee Info</a> 
   <a href="/addTrainee.php#addTrainee" onclick="w3_close()" class="w3-padding w3-hover-white">Add Trainee</a>
-  <a href="/logout.php" onclick="w3_close()" class="w3-padding w3-hover-white">Logout</a>
 </nav>
 
 <!-- Top menu on small screens -->
@@ -44,7 +43,7 @@ body {font-size:16px;}
     <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Add Trainee.</b></h1>
     <hr style="width:50px;border:5px solid #607d8b" class="w3-round">
     <p>Add information about your trainee!</p>
-    <form action="/action_page.php" target="_blank">
+    <form name="form1" method="post" action="/save_addTrainee.php" target="_blank">
       <div class="w3-group">
         <label>Name</label>
         <input class="w3-input w3-border" type="text" name="Name" required>
