@@ -8,9 +8,9 @@
   		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 	
-	$strSQL = "SELECT * FROM member WHERE Username = '"
+	$strSQL = "SELECT * FROM user WHERE user_username = '"
 	.mysqli_real_escape_string($condb,$_POST['txtUsername'])
-	."' and Password = '".mysqli_real_escape_string($condb,$_POST['txtPassword'])
+	."' and user_password = '".mysqli_real_escape_string($condb,$_POST['txtPassword'])
 	."'";
 	$objQuery = mysqli_query($condb,$strSQL);
 	$objResult = mysqli_fetch_array($objQuery);
@@ -21,12 +21,12 @@
 	}
 	else
 	{
-			$_SESSION["UserID"] = $objResult["UserID"];
-			$_SESSION["Status"] = $objResult["Status"];
+			$_SESSION["user_id"] = $objResult["user_id"];
+			$_SESSION["user_status"] = $objResult["user_status"];
 
 			session_write_close();
 			
-			if($objResult["Status"] == "ADMIN")
+			if($objResult["user_status"] == "admin")
 			{
 				header("location:admin_page.php");
 			}

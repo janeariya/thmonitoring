@@ -19,11 +19,12 @@ body {font-size:16px;}
   <div class="w3-container">
     <h3 class="w3-padding-64"><b>Health<br>Monitoring</b></h3>
   </div>
-  <a href="https://webmonitoring.mybluemix.net/home.php#home" onclick="w3_close()" class="w3-padding w3-hover-white">Home</a> 
-  <a href="https://webmonitoring.mybluemix.net/monitoring.php#monitoring" onclick="w3_close()" class="w3-padding w3-hover-white">Monitoring</a> 
-  <a href="https://webmonitoring.mybluemix.net/progress.php#progress" onclick="w3_close()" class="w3-padding w3-hover-white">Progress</a> 
-  <a href="https://webmonitoring.mybluemix.net/traineeInfo.php#traineeInfo" onclick="w3_close()" class="w3-padding w3-hover-white">Trainee Info</a> 
-  <a href="https://webmonitoring.mybluemix.net/addTrainee.php#addTrainee" onclick="w3_close()" class="w3-padding w3-hover-white">Add Trainee</a>
+  <a href="/home.php#home" onclick="w3_close()" class="w3-padding w3-hover-white">Home</a> 
+  <a href="/monitoring.php#monitoring" onclick="w3_close()" class="w3-padding w3-hover-white">Monitoring</a> 
+  <a href="/progress.php#progress" onclick="w3_close()" class="w3-padding w3-hover-white">Progress</a> 
+  <a href="/traineeInfo.php#traineeInfo" onclick="w3_close()" class="w3-padding w3-hover-white">Trainee Info</a> 
+  <a href="/addTrainee.php#addTrainee" onclick="w3_close()" class="w3-padding w3-hover-white">Add Trainee</a>
+  <a href="/logout.php" onclick="w3_close()" class="w3-padding w3-hover-white">Logout</a>
 </nav>
 
 <!-- Top menu on small screens -->
