@@ -40,16 +40,42 @@ body {font-size:16px;}
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
   
   <!-- progress -->
-  <div class="w3-container" id="progress" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Progress.</b></h1>
-    <hr style="width:50px;border:5px solid #607d8b" class="w3-round">
-    <p>The best team in the world.</p>
-    <p>We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
-    <p><b>Our designers are thoughtfully chosen</b>:</p>
-  </div>
+    <div class="w3-container" id="traineeInfo" style="margin-top:75px">
+    	<h1 class="w3-xxxlarge w3-text-blue-grey"><b>Progress.</b></h1>
+    	<hr style="width:50px;border:5px solid #607d8b" class="w3-round">   
+  	</div>
+  	<?php
+		session_start();
+		include 'dbcon.php';
+		$sql = "SELECT trainee_id, trainee_name FROM `trainee` WHERE trainee_id IN (SELECT trainee_id FROM `trainerAndTrainee` WHERE trainer_id =".$_SESSION["user_id"].")";
+		$result = mysqli_query($condb, $sql);
+   	?>
+   
+   	
+   	
+	<?php
+		if (mysqli_num_rows($result) > 0) {
+	?>
+		 <form name="form1" method="post" action="/progressBar.php" target="_blank">
+		 <div class="w3-group">
+        	<label>Trainee name</label>
+        	<select class="w3-input w3-border" type="text" name="id" >
+	<?php
+     	// output data of each row
+     	while($row = mysqli_fetch_assoc($result)) {
+			echo '<option value="'.$row["trainee_id"].'">'.$row["trainee_name"].'</option>';	
+     	}
+	?>
+		</select>
+      	</div>
+		<button type="submit" class="w3-btn-block w3-padding-large w3-blue-grey w3-margin-bottom">Select Trainee</button>
+		</form>  
+	<?php
+		} else {
+     		echo "0 results";
+		}
+		mysqli_close($conn);
+	?>  
 
 <!-- End page content -->
 
