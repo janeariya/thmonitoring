@@ -23,6 +23,7 @@
 	{
 			$_SESSION["user_id"] = $objResult["user_id"];
 			$_SESSION["user_status"] = $objResult["user_status"];
+			$_SESSION["progress_id"] = 0;
 
 			session_write_close();
 			
