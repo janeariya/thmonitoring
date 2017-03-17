@@ -39,7 +39,7 @@ body {font-size:16px;}
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Time', 'Sales', 'Expenses', 'Profit'],
+          ['Time', 'Average Heart Rate', 'Calories burned', 'Total time'],
       //    ['2014', 1000, 400, 200],
       //    ['2015', 1170, 460, 250],
       //    ['2016', 660, 1120, 300],
@@ -47,11 +47,11 @@ body {font-size:16px;}
          <?php 
          	session_start();	
       		include 'dbcon.php';
-      	 	$query = "SELECT trainee_id, trainee_name, trainee_weight, trainee_height, trainee_age FROM trainee WHERE trainee_id = ".$_SESSION["progress_id"];
-      	 	
+      	 	//$query = "SELECT trainee_id, trainee_name, trainee_weight, trainee_height, trainee_age FROM trainee WHERE trainee_id = ".$_SESSION["progress_id"];
+      	 	$query = "SELECT min(timestamp) as minTimestamp, max(timestamp) as maxTimestamp, avg(trainee_hr) as avgHR, TIMESTAMPDIFF(MINUTE, min(timestamp), max(timestamp)) as totalTime FROM workout WHERE trainee_id = ".$_SESSION["progress_id"]." GROUP BY trainee_workout ORDER BY min(timestamp)";	 	
 		 	$exec = mysqli_query($condb,$query);
 		 	while($row = mysqli_fetch_array($exec)){
- 				echo "['".$row['trainee_id']."',".$row['trainee_weight'].",".$row['trainee_height'].",".$row['trainee_age']."],";
+ 				echo "['".$row['avgHR']."',".$row['avgHR'].",".$row['avgHR'].",".$row['totalTime']."],";
  			}
  			mysqli_close($condb);
  			
