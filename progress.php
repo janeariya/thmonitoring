@@ -47,12 +47,24 @@ body {font-size:16px;}
          <?php 
          	session_start();	
       		include 'dbcon.php';
-      	 	//$query = "SELECT trainee_id, trainee_name, trainee_weight, trainee_height, trainee_age FROM trainee WHERE trainee_id = ".$_SESSION["progress_id"];
+      		$queryInfo = "SELECT trainee_name, trainee_gender, trainee_weight, trainee_age FROM trainee WHERE trainee_id = ".$_SESSION["progress_id"];	 	
+		 	$execInfo = mysqli_query($condb,$query);
+      	 	
       	 	$query = "SELECT min(timestamp) as minTimestamp, max(timestamp) as maxTimestamp, avg(trainee_hr) as avgHR, TIMESTAMPDIFF(MINUTE, min(timestamp), max(timestamp)) as totalTime FROM workout WHERE trainee_id = ".$_SESSION["progress_id"]." GROUP BY trainee_workout ORDER BY min(timestamp)";	 	
 		 	$exec = mysqli_query($condb,$query);
 		 	while($row = mysqli_fetch_array($exec)){
- 				echo "['".$row['avgHR']."',".$row['avgHR'].",".$row['avgHR'].",".$row['totalTime']."],";
+ 				echo "['".$row['minTimestamp']."',".$row['avgHR'].",".cal($execInfo["trainee_gender"], $row['avgHR'], $execInfo["trainee_weight"], $execInfo["trainee_age"], $row['totalTime']).",".$row['totalTime']."],";
  			}
+ 			
+ 			function cal($gender, $hr, $weight, $age, $time) {
+    			if($gender == "female"){
+    				$cal = (0.4472*$hr-0.05741*($weight*2.2046)+0.074*$age-20.4022)*$time/4.18;
+    			}else{
+    				$cal = (0.6309*$hr+0.09036*($weight*2.2046)+0.2017*$age-55.0969)*$time/4.184;
+    			}
+    			return $cal;
+			}
+ 			
  			mysqli_close($condb);
  			
       	?>
