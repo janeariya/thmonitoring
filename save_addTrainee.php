@@ -1,13 +1,18 @@
-Warisara
 <?php
-//	seesion_start();
-//	if($_SESSION['UserID'] == "")
-//	{
-//		echo "Please Login!";
-//		exit();
-//	}
+	session_start();
+	//if($_SESSION['user_id'] == "")
+	//{
+	//	echo "Please Login!";
+	//	exit();
+	//}	
 	
 	include('dbcon.php');
+	
+	if(trim($_POST["ID"]) == "")
+	{
+		echo "Please input ID!";
+		exit();	
+	}
 	
 	if(trim($_POST["Name"]) == "")
 	{
@@ -40,40 +45,32 @@ Warisara
 	}
 		
 	
-	//find max id and add by 1 
-	$sqlMaxID = "SELECT MAX(trainee_id) FROM trainee";
-	$QueryMaxID = mysqli_query($condb,$sqlMaxID);
-	$ResultMaxID = mysqli_fetch_array($QueryMaxID);
-	echo $ResultMaxID["MAX(trainee_id)"];
-	$Max = $ResultMaxID["MAX(trainee_id)"];
-	$newMax = intval($ResultMaxID["MAX(trainee_id)"])+1;
-	echo $newMax;
-	
-	
-	$strSQL = "SELECT * FROM trainee WHERE trainee_name = '".trim($_POST['Name'])."' ";
+	$strSQL = "SELECT * FROM trainee WHERE trainee_id = '".trim($_POST['ID'])."' ";
 	$objQuery = mysqli_query($condb,$strSQL);
 	$objResult = mysqli_fetch_array($objQuery);
 	if($objResult)
 	{
-			echo "Username already exists!";
+			echo "This trainee already exists!";
 	}
 	else
 	{	
 		//add to trainee table
-		$sqlAddtrainee = "INSERT INTO trainee (trainee_name,trainee_gender,trainee_weight,trainee_height,trainee_age) VALUES ('".$_POST["Name"]."', 
-		'".$_POST["Gender"]."','".$_POST["Weight"]."','".$_POST["Height"]."','".$_POST["Age"]."')";
+		$sqlAddtrainee = "INSERT INTO trainee (trainee_id,trainee_name,trainee_gender,trainee_weight,trainee_height,trainee_age) VALUES ('".$_POST["ID"]."','".$_POST["Name"]."','".$_POST["Gender"]."','".$_POST["Weight"]."','".$_POST["Height"]."','".$_POST["Age"]."')";
 		$queryAddtrainee = mysqli_query($condb,$sqlAddtrainee);
 		
 		
 		//add to trainerandtrainee table
-		//$sqlAddID = "INSERT INTO `trainerAndTrainee`(`tt_id`, `trainer_id`, `trainee_id`) VALUES ([value-1],[value-2],[value-3])";
-		//$queryAddID = musqli_query($condb,$sqlAddID);
+		$sqlAddID = "INSERT INTO `trainerAndTrainee`(`trainer_id`, `trainee_id`) VALUES ('".$_SESSION["user_id"]."','".$_POST["ID"]."')";
+		$queryAddID = mysqli_query($condb,$sqlAddID);
 		
-		echo $sqlAddtrainee;
-		
-		echo "Register Completed!<br>";		
+		//echo $sqlAddtrainee;
+		//echo $sqlAddID;
 	
-		echo "<br> Go to <a href='login.php'>Login page</a>";
+		//echo "Register Completed!<br>";		
+
+		header("location:traineeInfo.php");
+	
+		//echo "<br> Go to <a href='login.php'>Login page</a>";
 		
 	}
 

@@ -1,3 +1,13 @@
+<?php
+	session_start();
+	if($_SESSION['user_id'] == "")
+	{
+		echo "Please Login!";
+		exit();
+	}	
+	
+?>
+
 <!DOCTYPE html>
 <html>
 <title>W3.CSS Template</title>
@@ -44,14 +54,21 @@ body {font-size:16px;}
     <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Add Trainee.</b></h1>
     <hr style="width:50px;border:5px solid #607d8b" class="w3-round">
     <p>Add information about your trainee!</p>
-    <form name="form1" method="post" action="/save_addTrainee.php" target="_blank">
+    <form name="form1" method="post" action="/save_addTrainee.php" target="_self">
+      <div class="w3-group">
+        <label>ID</label>
+        <input class="w3-input w3-border" type="text" name="ID" required>
+      </div>
       <div class="w3-group">
         <label>Name</label>
         <input class="w3-input w3-border" type="text" name="Name" required>
       </div>
       <div class="w3-group">
         <label>Gender</label>
-        <input class="w3-input w3-border" type="text" name="Gender" required>
+        <select class="w3-input w3-border" type="text" name="Gender" >
+  			<option value="Female">Female</option>
+  			<option value="Male">Male</option>
+		</select>
       </div>
       <div class="w3-group">
         <label>Weight</label>
@@ -64,6 +81,20 @@ body {font-size:16px;}
       <div class="w3-group">
         <label>Age</label>
         <input class="w3-input w3-border" type="text" name="Age" required>
+      </div>
+      <button type="submit" class="w3-btn-block w3-padding-large w3-blue-grey w3-margin-bottom">Add Trainee</button>
+    </form>  
+  </div>
+
+<!--Add trainee by id-->
+ <div class="w3-container" id="addTrainee" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Add by ID.</b></h1>
+    <hr style="width:50px;border:5px solid #607d8b" class="w3-round">
+    <p>If trainee already exits please add by ID</p>
+    <form name="form1" method="post" action="/save_addTraineeByID.php" target="_self">
+      <div class="w3-group">
+        <label>ID</label>
+        <input class="w3-input w3-border" type="text" name="ID" required>
       </div>
       <button type="submit" class="w3-btn-block w3-padding-large w3-blue-grey w3-margin-bottom">Add Trainee</button>
     </form>  

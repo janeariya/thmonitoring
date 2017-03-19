@@ -1,3 +1,18 @@
+<?php
+	session_start();
+	if($_SESSION['user_id'] == "")
+	{
+		echo "Please Login!";
+		exit();
+	}
+	
+	include('dbcon.php');
+	$sql = "SELECT * FROM trainee ";
+	$sql .="WHERE trainee_id = '".$_GET["trainee_id"]."' ";
+	$result = mysqli_query($condb, $sql);
+	$row = mysqli_fetch_array($result);
+?>
+
 <!DOCTYPE html>
 <html>
 <title>W3.CSS Template</title>
@@ -39,70 +54,39 @@ body {font-size:16px;}
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
 
-  <!-- Monitoring -->
-  <div class="w3-container" id="monitoring" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Monitoring.</b></h1>
+  <!-- Add trainee -->
+  <div class="w3-container" id="editTrainee" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Edit Trainee.</b></h1>
     <hr style="width:50px;border:5px solid #607d8b" class="w3-round">
-    <p>We are a interior design service that focus on what's best for your home and what's best for you!</p>
-    <p>Some text about our services - what we do and what we offer. We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
+    <p>Edit information about your trainee!</p>
+    <form name="form1" method="post" action="/save_editTrainee.php?trainee_id=<?php echo $row["trainee_id"];?> target="_blank">
+      <div class="w3-group">
+        <label>ID</label>
+        <table class="w3-input w3-border"><tr><td><?php echo $row["trainee_id"];?></td></tr></table>
+      </div>
+      <div class="w3-group">
+        <label>Name</label>
+        <table class="w3-input w3-border"><tr><td><?php echo $row["trainee_name"];?></td></tr></table>
+      </div>
+      <div class="w3-group">
+        <label>Gender</label>
+        <table class="w3-input w3-border"><tr><td><?php echo $row["trainee_gender"];?></td></tr></table>
+      </div>
+      <div class="w3-group">
+        <label>Weight</label>
+        <input class="w3-input w3-border" name="Weight" type="text" value="<?php echo $row["trainee_weight"];?>" required>
+      </div>
+      <div class="w3-group">
+        <label>Height</label>
+        <input class="w3-input w3-border" name="Height" type="text" value="<?php echo $row["trainee_height"];?>" required>
+      </div>
+      <div class="w3-group">
+        <label>Age</label>
+        <input class="w3-input w3-border" name="Age" type="text" value="<?php echo $row["trainee_age"];?>" required>
+      </div>
+      <button type="submit" class="w3-btn-block w3-padding-large w3-blue-grey w3-margin-bottom">Edit Trainee</button>
+    </form>  
   </div>
-  
-  
-  
-  
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript">
-	window.onload = function () {
-		var dps = []; // dataPoints
-		var chart = new CanvasJS.Chart("chartContainer",{
-			title :{
-				text: "Live Random Data Jaaa"
-			},
-			data: [{
-				type: "line",
-				dataPoints: dps
-			}]
-		});
-		var xVal = 0;
-		var yVal = 100;
-		var updateInterval = 15000;
-		var dataLength = 80; // number of dataPoints visible at any point
-		var updateChart = function (count) {
-			count = count || 1;
-			// count is number of times loop runs to generate random dataPoints.
-		 	$.ajax({
-        	url: '/testGetDataToGraph.php',
-        	method: 'GET'
-      		}).done(function(response) {
-				for (var j = 0; j < count; j++) {
-					//yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-					yVal = parseInt(response);
-					dps.push({
-						x: new Date(),
-						y: yVal
-					});
-					xVal++;
-				};
-				if (dps.length > dataLength)
-				{
-					dps.shift();
-				}
-				chart.render();
-		});
-	 };
-		// generates first set of dataPoints
-		updateChart(dataLength);
-		// update chart after specified time.
-		setInterval(function(){updateChart()}, updateInterval);
-	}
-	</script>
-	<script type="text/javascript" src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
-  
-  
-  
 
 <!-- End page content -->
 

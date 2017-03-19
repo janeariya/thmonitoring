@@ -10,25 +10,20 @@ body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
 body {font-size:16px;}
 .w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.UI8;cursor:pointer}
 .w3-half img:hover{opacity:1}
-
 		table {
     		border-collapse: collapse;
     		width: 100%;
 		}
-
 		th, td {
     		text-align: left;
     		padding: 8px;
 		}
-
 		tr:nth-child(even){background-color: #f2f2f2}
-
 		th {
     		background-color: #607d8b;
     		color: white;
 		}
 	
-
 </style>
 <body>
 
@@ -63,26 +58,63 @@ body {font-size:16px;}
     <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Trainee Information.</b></h1>
     <hr style="width:50px;border:5px solid #607d8b" class="w3-round">   
   </div>
+ 
 
 <?php
 	session_start();
 	include 'dbcon.php';
-
+	//trainee
 	$sql = "SELECT * FROM `trainee` WHERE trainee_id IN (SELECT trainee_id FROM trainerAndTrainee WHERE trainer_id =".$_SESSION["user_id"].")";
 	$result = mysqli_query($condb, $sql);
+	
+	//trainer
+	$strSQL = "SELECT * FROM user WHERE user_id = '".$_SESSION['user_id']."' ";
+	$objQuery = mysqli_query($condb,$strSQL);
+	$objResult = mysqli_fetch_array($objQuery);
+	
+?>
+	<div class="w3-group">
+        <h5 class="w3-opacity"><b>Trainer Name : <?php echo $objResult["user_name"] ?> </b></h5>
+   	</div>
 
-if (mysqli_num_rows($result) > 0) {
-	 echo "<table><tr> <th>ID</th> <th>Name</th> <th>Gender</th> <th>Weight</th> <th>height</th> <th>Age</th></tr>";
-     // output data of each row
-     while($row = mysqli_fetch_assoc($result)) {
-         echo "<tr><td>" . $row["trainee_id"]. "</td><td>" . $row["trainee_name"] ."</td><td>" . $row["trainee_gender"] ."</td><td>" . $row["trainee_weight"] ."</td><td>" . $row["trainee_height"] ."</td><td>" . $row["trainee_age"] . "</td></tr>";
-     }
-     echo "</table>";
-} else {
-     echo "0 results";
-}
-
-mysqli_close($conn);
+<?php
+	if (mysqli_num_rows($result) > 0) {
+?>
+		<table>
+		<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Gender</th>
+		<th>Weight</th>
+		<th>height</th>
+		<th>Age</th>
+		<th>Action</th>
+		</tr>
+<?php
+     	// output data of each row
+     	while($row = mysqli_fetch_assoc($result)) { 
+?>
+			<tr>
+				<td><?php echo $row["trainee_id"]; ?></td>
+				<td><?php echo $row["trainee_name"]; ?></td>
+				<td><?php echo $row["trainee_gender"]; ?></td>
+				<td><?php echo $row["trainee_weight"]; ?></td>
+				<td><?php echo $row["trainee_height"]; ?></td>
+				<td><?php echo $row["trainee_age"]; ?></td>
+				<td>
+					<a href="editTrainee.php?trainee_id=<?php echo $row["trainee_id"];?>">Edit</a>
+					<a href="JavaScript:if(confirm('Confirm Delete?')==true){window.location='deleteTrainee.php?trainee_id=<?php echo $row["trainee_id"];?>';}">Delete</a>
+				</td>
+			</tr>
+<?php 		
+     	}
+?>
+		</table>
+<?php
+	} else {
+     	echo "0 results";
+	}
+	mysqli_close($conn);
 ?>  
 
 
@@ -99,7 +131,6 @@ function w3_close() {
     document.getElementById("mySidenav").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
 }
-
 // Modal Image Gallery
 function onClick(element) {
   document.getElementById("img01").src = element.src;
