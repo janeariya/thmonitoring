@@ -38,7 +38,7 @@
 		exit();	
 	}
 	
-	if(trim($_POST["Age"]) == "")
+	if(trim($_POST["Bdate"]) == "")
 	{
 		echo "Please input Age!";
 		exit();	
@@ -55,7 +55,7 @@
 	else
 	{	
 		//add to trainee table
-		$sqlAddtrainee = "INSERT INTO trainee (trainee_id,trainee_name,trainee_gender,trainee_weight,trainee_height,trainee_age) VALUES ('".$_POST["ID"]."','".$_POST["Name"]."','".$_POST["Gender"]."','".$_POST["Weight"]."','".$_POST["Height"]."','".$_POST["Age"]."')";
+		$sqlAddtrainee = "INSERT INTO trainee (trainee_id,trainee_name,trainee_gender,trainee_weight,trainee_height,trainee_birthdate) VALUES ('".$_POST["ID"]."','".$_POST["Name"]."','".$_POST["Gender"]."','".$_POST["Weight"]."','".$_POST["Height"]."','".$_POST["Bdate"]."')";
 		$queryAddtrainee = mysqli_query($condb,$sqlAddtrainee);
 			
 

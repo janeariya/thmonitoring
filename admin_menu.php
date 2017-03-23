@@ -10,7 +10,7 @@
 
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>Health Monitoring</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
@@ -48,13 +48,14 @@ body {font-size:16px;}
   <a href="/admin_trainerInfo.php#trainerInfo" onclick="w3_close()" class="w3-padding w3-hover-white">Trainer Information</a> 
   <a href="/admin_traineeInfo.php#traineeInfo" onclick="w3_close()" class="w3-padding w3-hover-white">Trainee Informaion</a> 
   <a href="/admin_matchInfo.php#matchInfo" onclick="w3_close()" class="w3-padding w3-hover-white">Match Informaion</a> 
+  <a href="https://watsoniotplatform.mybluemix.net" onclick="w3_close()" class="w3-padding w3-hover-white"  target="_blank">Add Device</a> 
   <a href="/logout.php" onclick="w3_close()" class="w3-padding w3-hover-white">Logout</a>
 </nav>
 
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top w3-hide-large w3-blue-grey w3-xlarge w3-padding">
   <a href="javascript:void(0)" class="w3-btn w3-blue-grey w3-border w3-border-white w3-margin-right" onclick="w3_open()">☰</a>
-  <span>Company Name</span>
+  <span>Health Monitoring</span>
 </header>
 
 <!-- Overlay effect when opening sidenav on small screens -->

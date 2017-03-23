@@ -2,6 +2,7 @@
 	include 'admin_menu.php'; ?>
 
   <!-- Add trainee -->
+  
   <div class="w3-container" id="addTrainee" style="margin-top:75px">
     <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Add Trainee.</b></h1>
     <hr style="width:50px;border:5px solid #607d8b" class="w3-round">
@@ -31,9 +32,10 @@
         <input class="w3-input w3-border" type="text" name="Height" required>
       </div>
       <div class="w3-group">
-        <label>Age</label>
-        <input class="w3-input w3-border" type="text" name="Age" required>
+        <label>Birthdate</label>
+        <input class="w3-input w3-border" type="date" name="Bdate" required>
       </div>
+
       <button type="submit" class="w3-btn-block w3-padding-large w3-blue-grey w3-margin-bottom">Add Trainee</button>
     </form>  
   </div>

@@ -11,7 +11,7 @@
 	session_start();
 	include 'dbcon.php';
 	//trainee
-	$sql = "SELECT * FROM `trainee` ";
+	$sql = "SELECT trainee_id, trainee_name, trainee_gender, trainee_weight, trainee_height,  floor(datediff(curdate(),trainee_birthdate) / 365) AS trainee_age FROM `trainee` ";
 	$result = mysqli_query($condb, $sql);
 ?>
 

@@ -25,7 +25,7 @@
          <?php 
          	session_start();	
       		include 'dbcon.php';
-      		$queryInfo = "SELECT trainee_name, trainee_gender, trainee_weight, trainee_age FROM trainee WHERE trainee_id = ".$_SESSION["progress_id"];	 	
+      		$queryInfo = "SELECT trainee_name, trainee_gender, trainee_weight, floor(datediff(curdate(),trainee_birthdate) / 365) AS trainee_age FROM trainee WHERE trainee_id = ".$_SESSION["progress_id"];	 	
 		 	$execInfo = mysqli_query($condb,$query);
       	 	
       	 	$query = "SELECT min(timestamp) as minTimestamp, max(timestamp) as maxTimestamp, avg(trainee_hr) as avgHR, TIMESTAMPDIFF(MINUTE, min(timestamp), max(timestamp)) as totalTime FROM workout WHERE trainee_id = ".$_SESSION["progress_id"]." GROUP BY trainee_workout ORDER BY min(timestamp)";	 	
