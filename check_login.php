@@ -33,7 +33,7 @@
 			}
 			else
 			{
-				header("location:home.php");
+				header("location:monitoring.php");
 			}
 	}
 	mysqli_close($condb);

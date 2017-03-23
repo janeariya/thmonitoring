@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	include 'dbcon.php';
-	$sql = "UPDATE trainee SET trainee_weight = '".trim($_POST['Weight'])."'";
+	$sql = "UPDATE trainee SET trainee_weight = '".trim($_POST['Weight'])."' , trainee_height = '".trim($_POST['Height'])."' , trainee_age = '".trim($_POST['Age'])."' ";
 	$sql .="WHERE trainee_id = '".$_GET["trainee_id"]."' ";
 	$result = mysqli_query($condb, $sql);
 	
@@ -10,7 +10,7 @@
 	
 	if($result)
 	{
-		header("location:traineeInfo.php");
+		header("location:admin_traineeInfo.php");
 	}
 	else
 	{

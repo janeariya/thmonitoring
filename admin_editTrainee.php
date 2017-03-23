@@ -1,10 +1,7 @@
-<?php
-	session_start();
-	if($_SESSION['user_id'] == "")
-	{
-		echo "Please Login!";
-		exit();
-	}
+ 	<?php
+	include 'admin_menu.php'; ?>
+ 
+ <?php
 	
 	include('dbcon.php');
 	$sql = "SELECT * FROM trainee ";
@@ -12,17 +9,13 @@
 	$result = mysqli_query($condb, $sql);
 	$row = mysqli_fetch_array($result);
 ?>
-
-<?php
-	include 'user_menu.php';
-?>
-
-  <!-- Add trainee -->
+ 
+ <!-- Add trainee -->
   <div class="w3-container" id="editTrainee" style="margin-top:75px">
     <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Edit Trainee.</b></h1>
     <hr style="width:50px;border:5px solid #607d8b" class="w3-round">
     <p>Edit information about your trainee!</p>
-    <form name="form1" method="post" action="/save_editTrainee.php?trainee_id=<?php echo $row["trainee_id"];?> target="_blank">
+    <form name="form1" method="post" action="/admin_save_editTrainee.php?trainee_id=<?php echo $row["trainee_id"];?> target="_self">
       <div class="w3-group">
         <label>ID</label>
         <table class="w3-input w3-border"><tr><td><?php echo $row["trainee_id"];?></td></tr></table>
@@ -41,18 +34,15 @@
       </div>
       <div class="w3-group">
         <label>Height</label>
-        <table class="w3-input w3-border"><tr><td><?php echo $row["trainee_height"];?></td></tr><table>
+        <input class="w3-input w3-border" name="Height" type="text" value="<?php echo $row["trainee_height"];?>" required>
       </div>
       <div class="w3-group">
         <label>Age</label>
-        <table class="w3-input w3-border"><tr><td><?php echo $row["trainee_age"];?></td></tr></table>
+        <input class="w3-input w3-border" name="Age" type="text" value="<?php echo $row["trainee_age"];?>" required>
       </div>
       <button type="submit" class="w3-btn-block w3-padding-large w3-blue-grey w3-margin-bottom">Edit Trainee</button>
     </form>  
   </div>
-
-<!-- End page content -->
-
-<?php
-	include 'footpage.php';
-?>
+  
+  	<?php
+	include 'footpage.php'; ?>

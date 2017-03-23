@@ -1,30 +1,20 @@
-<?php
-	include 'user_menu.php';
-?>
+	<?php
+	include 'admin_menu.php'; ?>
 
-  <!-- Trainee Info -->
+  <!-- Add trainee -->
   <div class="w3-container" id="traineeInfo" style="margin-top:75px">
     <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Trainee Information.</b></h1>
-    <hr style="width:50px;border:5px solid #607d8b" class="w3-round">   
+    <hr style="width:50px;border:5px solid #607d8b" class="w3-round">
   </div>
- 
-
-<?php
+  
+  <?php
 	session_start();
 	include 'dbcon.php';
 	//trainee
-	$sql = "SELECT * FROM `trainee` WHERE trainee_id IN (SELECT trainee_id FROM trainerAndTrainee WHERE trainer_id =".$_SESSION["user_id"].")";
+	$sql = "SELECT * FROM `trainee` ";
 	$result = mysqli_query($condb, $sql);
-	
-	//trainer
-	$strSQL = "SELECT * FROM user WHERE user_id = '".$_SESSION['user_id']."' ";
-	$objQuery = mysqli_query($condb,$strSQL);
-	$objResult = mysqli_fetch_array($objQuery);
-	
 ?>
-	<div class="w3-group">
-        <h5 class="w3-opacity"><b>Trainer Name : <?php echo $objResult["user_name"] ?> </b></h5>
-   	</div>
+
 
 <?php
 	if (mysqli_num_rows($result) > 0) {
@@ -51,7 +41,8 @@
 				<td><?php echo $row["trainee_height"]; ?></td>
 				<td><?php echo $row["trainee_age"]; ?></td>
 				<td>
-					<a href="editTrainee.php?trainee_id=<?php echo $row["trainee_id"];?>">Edit</a>
+					<a href="admin_editTrainee.php?trainee_id=<?php echo $row["trainee_id"];?>">Edit</a>
+					<a href="JavaScript:if(confirm('Confirm Delete?')==true){window.location='admin_save_deleteTrainee.php?trainee_id=<?php echo $row["trainee_id"];?>';}">Delete</a>
 				</td>
 			</tr>
 <?php 		
@@ -62,12 +53,11 @@
 	} else {
      	echo "0 results";
 	}
-	mysqli_close($conn);
+	mysqli_close($condb);
 ?>  
 
 
-<!-- End page content -->
 
-<?php
-	include 'footpage.php';
-?>
+
+	<?php
+	include 'footpage.php'; ?>

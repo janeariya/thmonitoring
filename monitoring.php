@@ -1,43 +1,6 @@
-<!DOCTYPE html>
-<html>
-<title>W3.CSS Template</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-<style>
-body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
-body {font-size:16px;}
-.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.UI8;cursor:pointer}
-.w3-half img:hover{opacity:1}
-</style>
-<body>
-
-<!-- Sidenav/menu -->
-<nav class="w3-sidenav w3-blue-grey w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold" id="mySidenav"><br>
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-padding-xlarge w3-hide-large w3-display-topleft w3-hover-white" style="width:100%;font-size:22px">Close Menu</a>
-  <div class="w3-container">
-    <h3 class="w3-padding-64"><b>Health<br>Monitoring</b></h3>
-  </div>
-  <a href="/home.php#home" onclick="w3_close()" class="w3-padding w3-hover-white">Home</a> 
-  <a href="/monitoring.php#monitoring" onclick="w3_close()" class="w3-padding w3-hover-white">Monitoring</a> 
-  <a href="/progress.php#progress" onclick="w3_close()" class="w3-padding w3-hover-white">Progress</a> 
-  <a href="/traineeInfo.php#traineeInfo" onclick="w3_close()" class="w3-padding w3-hover-white">Trainee Info</a> 
-  <a href="/addTrainee.php#addTrainee" onclick="w3_close()" class="w3-padding w3-hover-white">Add Trainee</a>
-  <a href="/logout.php" onclick="w3_close()" class="w3-padding w3-hover-white">Logout</a>
-</nav>
-
-<!-- Top menu on small screens -->
-<header class="w3-container w3-top w3-hide-large w3-blue-grey w3-xlarge w3-padding">
-  <a href="javascript:void(0)" class="w3-btn w3-blue-grey w3-border w3-border-white w3-margin-right" onclick="w3_open()">☰</a>
-  <span>Company Name</span>
-</header>
-
-<!-- Overlay effect when opening sidenav on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:340px;margin-right:40px">
+<?php
+	include 'user_menu.php';
+?>
 
   <!-- Monitoring -->
   <div class="w3-container" id="monitoring" style="margin-top:75px">
@@ -50,10 +13,6 @@ body {font-size:16px;}
  <?php
 	session_start();
 	include 'dbcon.php';
-	//trainee
-	$sql = "SELECT * FROM `trainee` WHERE trainee_id IN (SELECT trainee_id FROM trainerAndTrainee WHERE trainer_id =".$_SESSION["user_id"].")";
-	$result = mysqli_query($condb, $sql);
-	//$row = mysqli_fetch_assoc($result);
 	
 	//trainer
 	$strSQL = "SELECT * FROM user WHERE user_id = '".$_SESSION['user_id']."' ";
@@ -65,10 +24,31 @@ body {font-size:16px;}
 	$number = mysqli_num_rows($resultnumT);
 	//echo $number;
 	
+	function zone($gender, $hr, $age){
+		if($gender=="female"){
+			$maxHR = 212.9 - (0.67*$age);
+		}else{
+			$maxHR = 206.9 - (0.67*$age);
+		}
+		
+		if($hr >=(90/100)*$maxHR){
+			$zone = 5;
+		}else if(($hr >= (80/100)*$maxHR)&&($hr < (90/100)*$maxHR)){
+			$zone = 4;
+		}else if(($hr >= (70/100)*$maxHR)&&($hr < (80/100)*$maxHR)){
+			$zone = 3;
+		}else if(($hr >= (60/100)*$maxHR)&&($hr < (70/100)*$maxHR)){
+			$zone = 2;
+		}else if(($hr >= (50/100)*$maxHR)&&($hr < (60/100)*$maxHR)){
+			$zone = 1;
+		}
+		return $zone;		
+	}
+	
 ?>
 	<!--print trainer name-->
 	<div class="w3-group">
-        <h5 class="w3-opacity"><b>Trainer Name : <?php echo $objResult["user_name"] ?> </b></h5>
+        <h4 class="w3-opacity"><b>Trainer Name : <?php echo $objResult["user_name"] ?> </b></h4>
    	</div>
   
   
@@ -80,7 +60,7 @@ body {font-size:16px;}
 	var numTrainee = <?php echo $number; ?>;   //2; //count of chart
 	console.log("numTrainee : "+numTrainee);
 	var updateInterval = 15000; //update every updateInterval
-	var dataLength = 80; // number of dataPoints visible at any point
+	var dataLength = 20; // number of dataPoints visible at any point
 	var numArray = 0;
 	var numA1,numA2,numA3,numA4,numA5,numA6,numA7,numA8,numA9,numA10 ;
 	var traineeName = [];
@@ -173,7 +153,7 @@ switch (numTrainee) {
 		var dps8 = [];  var xVal8 = 0; var yVal8 = 100; 
 		numA8 = numArray;
 		var chart8 = new CanvasJS.Chart("chartContainer8",{
-			title :{text: "Heart Rate"},
+			subtitles: [{text: "Trainee Name : ",fontSize: 20,fontFamily: "Courier New", horizontalAlign: "left"},	{text: "Heart Rate : ",fontSize: 20 , fontFamily: "Courier New" , horizontalAlign: "left" },	{text: "Zone : ",fontSize: 20,fontFamily: "Courier New" , horizontalAlign: "left"}],
 			data: [{type: "line",dataPoints: dps8}]
 		});
 		chart8.render();
@@ -184,7 +164,7 @@ switch (numTrainee) {
   case 2:
     	var dps9 = []; var xVal9 = 0; var yVal9 = 100;
 		var chart9 = new CanvasJS.Chart("chartContainer9",{
-			title :{text: "Heart Rate"},
+			subtitles: [{text: "Trainee Name : ",fontSize: 20,fontFamily: "Courier New", horizontalAlign: "left"},	{text: "Heart Rate : ",fontSize: 20 , fontFamily: "Courier New" , horizontalAlign: "left"},	{text: "Zone : ",fontSize: 20,fontFamily: "Courier New" , horizontalAlign: "left"}],
 			data: [{type: "line",dataPoints: dps9}]
 		});
 		chart9.render();
@@ -196,7 +176,7 @@ switch (numTrainee) {
   case 1:
 		var dps10 = []; var xVal10 = 0; var yVal10 = 100;
 		var chart10 = new CanvasJS.Chart("chartContainer10",{
-			title :{text: "Heart Rate"},
+			subtitles: [{text: "Trainee Name : ",fontSize: 20,fontFamily: "Courier New", horizontalAlign: "left"},	{text: "Heart Rate : ",fontSize: 20 , fontFamily: "Courier New" , horizontalAlign: "left"},	{text: "Zone : ",fontSize: 20,fontFamily: "Courier New" , horizontalAlign: "left"}],
 			data: [{type: "line",dataPoints: dps10}]
 		});
 		chart10.render();	
@@ -219,12 +199,10 @@ switch (numTrainee) {
       			//console.log(response);
       			var json = JSON.parse(response);
       
-	      		for(var i=0; i<numTrainee; i++) {
-					//เอาข้อมูลลง array 
-					traineeName.push(json[i].trainee_name);
-					
-				}
-				chart.options.title.text = "Heart rate trainee : " + traineeName[pArr];
+				//chart.options.title.text = "Trainee Name : " + json[pArr].trainee_name;
+				chart.subtitles[0].set("text","Trainee Name : " + json[pArr].trainee_name);
+				chart.subtitles[1].set("text","Heart Rate : " + json[pArr].trainee_hr);
+				chart.subtitles[2].set("text","Zone : " + calzone(json[pArr].trainee_gender,json[pArr].trainee_hr,json[pArr].trainee_age) );
 				//console.log(traineeName[pArr]);
 				
 			
@@ -244,10 +222,33 @@ switch (numTrainee) {
 				}
 
 				chart.render();
-
 		});
 	 };
-	
+	 
+	var calzone = function(gender,hr,age){
+		
+		var maxHR=0;
+		
+		if(gender ==0){
+		  maxHR = 212.9 - (0.67*age);
+		}else{
+		  maxHR = 206.9 - (0.67*age);
+		}
+		
+		if(hr >= (90/100)*maxHR){
+		  zone = 5;
+		}else if((hr >= (80/100)*maxHR)&&(hr < (90/100)*maxHR)){
+		  zone = 4;
+		}else if((hr >= (70/100)*maxHR)&&(hr < (80/100)*maxHR)){
+		  zone = 3;
+		}else if((hr >= (60/100)*maxHR)&&(hr < (70/100)*maxHR)){
+		  zone = 2;
+		}else if((hr >= (50/100)*maxHR)&&(hr < (60/100)*maxHR)){
+		  zone = 1;
+		}
+		
+		return zone;
+	}
 
 
 	}
@@ -260,16 +261,16 @@ switch (numTrainee) {
 <?php 
 	$numTrainee = $number;//2;
 	switch($numTrainee){
-		case 10 : ?> <div id="chartContainer1" style="height: 300px; width:100%;"></div> <?php
-		case 9 : ?> <div id="chartContainer2" style="height: 300px; width:100%;"></div> <?php
-		case 8 : ?> <div id="chartContainer3" style="height: 300px; width:100%;"></div> <?php
-		case 7 : ?> <div id="chartContainer4" style="height: 300px; width:100%;"></div> <?php
-		case 6 : ?> <div id="chartContainer5" style="height: 300px; width:100%;"></div> <?php
-		case 5 : ?> <div id="chartContainer6" style="height: 300px; width:100%;"></div> <?php
-		case 4 : ?> <div id="chartContainer7" style="height: 300px; width:100%;"></div> <?php
-		case 3 : ?> <div id="chartContainer8" style="height: 300px; width:100%;"></div> <?php
-		case 2 : ?> <div id="chartContainer9" style="height: 300px; width:100%;"></div> <?php
-		case 1 : ?> <div id="chartContainer10" style="height: 300px; width:100%;"></div> <?php
+		case 10 : ?> <div id="chartContainer1" style="height: 300px; width:100%;"></div><br> <?php
+		case 9 : ?> <div id="chartContainer2" style="height: 300px; width:100%;"></div><br> <?php
+		case 8 : ?> <div id="chartContainer3" style="height: 300px; width:100%;"></div><br> <?php
+		case 7 : ?> <div id="chartContainer4" style="height: 300px; width:100%;"></div><br> <?php
+		case 6 : ?> <div id="chartContainer5" style="height: 300px; width:100%;"></div><br> <?php
+		case 5 : ?> <div id="chartContainer6" style="height: 300px; width:100%;"></div><br> <?php
+		case 4 : ?> <div id="chartContainer7" style="height: 300px; width:100%;"></div><br> <?php
+		case 3 : ?> <div id="chartContainer8" style="height: 300px; width:100%;"></div><br> <?php 
+		case 2 : ?> <div id="chartContainer9" style="height: 300px; width:100%;"></div><br> <?php
+		case 1 : ?> <div id="chartContainer10" style="height: 300px; width:100%;"></div><br> <?php
 		default: echo "html 10 chart";
 	} 
 ?>	
@@ -278,27 +279,6 @@ switch (numTrainee) {
 
 <!-- End page content -->
 
-<script>
-// Script to open and close sidenav
-function w3_open() {
-    document.getElementById("mySidenav").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-}
- 
-function w3_close() {
-    document.getElementById("mySidenav").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-}
-
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
-}
-
-</script>
-
-</body>
-</html>
+<?php
+	include 'footpage.php';
+?>

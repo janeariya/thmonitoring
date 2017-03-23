@@ -57,20 +57,10 @@
 		//add to trainee table
 		$sqlAddtrainee = "INSERT INTO trainee (trainee_id,trainee_name,trainee_gender,trainee_weight,trainee_height,trainee_age) VALUES ('".$_POST["ID"]."','".$_POST["Name"]."','".$_POST["Gender"]."','".$_POST["Weight"]."','".$_POST["Height"]."','".$_POST["Age"]."')";
 		$queryAddtrainee = mysqli_query($condb,$sqlAddtrainee);
-		
-		
-		//add to trainerandtrainee table
-		$sqlAddID = "INSERT INTO `trainerAndTrainee`(`trainer_id`, `trainee_id`) VALUES ('".$_SESSION["user_id"]."','".$_POST["ID"]."')";
-		$queryAddID = mysqli_query($condb,$sqlAddID);
-		
-		//echo $sqlAddtrainee;
-		//echo $sqlAddID;
-	
-		//echo "Register Completed!<br>";		
+			
 
-		header("location:traineeInfo.php");
+		header("location:admin_traineeInfo.php");
 	
-		//echo "<br> Go to <a href='login.php'>Login page</a>";
 		
 	}
 

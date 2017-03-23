@@ -1,47 +1,31 @@
-<?php
-	session_start();
-	if($_SESSION['user_id'] == "")
-	{
-		echo "Please Login!";
-		exit();
-	}
+	<?php
+	include 'admin_menu.php'; ?>
 
-	if($_SESSION['user_status'] != "admin")
-	{
-		echo "This page for Admin only!";
-		exit();
-	}	
-	
-	//$condb = mysqli_connect("us-cdbr-iron-east-04.cleardb.net","ba7e6dcfa1653e","5ddeaaf0","ad_67c8190313684df","3306");
-	include 'dbcon.php';
-	$strSQL = "SELECT * FROM user WHERE user_id = '".$_SESSION['user_id']."' ";
-	
-	$objQuery = mysqli_query($condb,$strSQL);
-	$objResult = mysqli_fetch_array($objQuery);
-	mysqli_close($condb);
-?>
-<html>
-<head>
-<title>Health Monitoring</title>
-</head>
-<body>
-  Welcome to Admin Page! <br>
-  <table border="1" style="width: 300px">
-    <tbody>
-      <tr>
-        <td width="87"> &nbsp;Username</td>
-        <td width="197"><?php echo $objResult["user_username"];?>
-        </td>
-      </tr>
-      <tr>
-        <td> &nbsp;Name</td>
-        <td><?php echo $objResult["user_name"];?></td>
-      </tr>
-    </tbody>
-  </table>
-  <br>
-  <a href="edit_profile.php">Edit</a><br>
-  <br>
-  <a href="logout.php">Logout</a>
-</body>
-</html>
+  <!-- Add trainee -->
+  <div class="w3-container" id="addTrainer" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Add Trainer.</b></h1>
+    <hr style="width:50px;border:5px solid #607d8b" class="w3-round">
+    <p>Add information about your trainer!</p>
+    <form name="form1" method="post" action="/admin_save_addTrainer.php" target="_self">
+      <div class="w3-group">
+        <label>Name</label>
+        <input class="w3-input w3-border" type="text" name="Name" required>
+      </div>
+      <div class="w3-group">
+        <label>Username</label>
+        <input class="w3-input w3-border" type="text" name="Username" required>
+      </div>
+      <div class="w3-group">
+        <label>Password</label>
+        <input class="w3-input w3-border" type="password" name="Password" required>
+      </div>     
+      <div class="w3-group">
+        <label>Confirm Password</label>
+        <input class="w3-input w3-border" type="password" name="ConPass" required>
+      </div>
+      <button type="submit" class="w3-btn-block w3-padding-large w3-blue-grey w3-margin-bottom">Add Trainer</button>
+    </form>  
+  </div>
+
+	<?php
+	include 'footpage.php'; ?>
