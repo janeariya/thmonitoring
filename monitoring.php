@@ -24,27 +24,6 @@
 	$number = mysqli_num_rows($resultnumT);
 	//echo $number;
 	
-	function zone($gender, $hr, $age){
-		if($gender=="female"){
-			$maxHR = 212.9 - (0.67*$age);
-		}else{
-			$maxHR = 206.9 - (0.67*$age);
-		}
-		
-		if($hr >=(90/100)*$maxHR){
-			$zone = 5;
-		}else if(($hr >= (80/100)*$maxHR)&&($hr < (90/100)*$maxHR)){
-			$zone = 4;
-		}else if(($hr >= (70/100)*$maxHR)&&($hr < (80/100)*$maxHR)){
-			$zone = 3;
-		}else if(($hr >= (60/100)*$maxHR)&&($hr < (70/100)*$maxHR)){
-			$zone = 2;
-		}else if(($hr >= (50/100)*$maxHR)&&($hr < (60/100)*$maxHR)){
-			$zone = 1;
-		}
-		return $zone;		
-	}
-	
 ?>
 	<!--print trainer name-->
 	<div class="w3-group">
@@ -202,7 +181,7 @@ switch (numTrainee) {
 				//chart.options.title.text = "Trainee Name : " + json[pArr].trainee_name;
 				chart.subtitles[0].set("text","Trainee Name : " + json[pArr].trainee_name);
 				chart.subtitles[1].set("text","Heart Rate : " + json[pArr].trainee_hr);
-				chart.subtitles[2].set("text","Zone : " + calzone(json[pArr].trainee_gender,json[pArr].trainee_hr,json[pArr].trainee_age) );
+				chart.subtitles[2].set("text","Zone : " + calzone(json[pArr].trainee_gender,json[pArr].trainee_hr,json[pArr].trainee_age,json[pArr].trainee_name) );
 				//console.log(traineeName[pArr]);
 				
 			
@@ -222,10 +201,14 @@ switch (numTrainee) {
 				}
 
 				chart.render();
+
 		});
+		
+		
+		
 	 };
 	 
-	var calzone = function(gender,hr,age){
+	var calzone = function(gender,hr,age,name){
 		
 		var maxHR=0;
 		
@@ -233,6 +216,10 @@ switch (numTrainee) {
 		  maxHR = 212.9 - (0.67*age);
 		}else{
 		  maxHR = 206.9 - (0.67*age);
+		}
+		
+		if(hr>maxHR){
+			alert("Trainee : " + name +  "\n heart rate exceeding maximum heart rate with : " + hr);
 		}
 		
 		if(hr >= (90/100)*maxHR){
@@ -271,7 +258,7 @@ switch (numTrainee) {
 		case 3 : ?> <div id="chartContainer8" style="height: 300px; width:100%;"></div><br> <?php 
 		case 2 : ?> <div id="chartContainer9" style="height: 300px; width:100%;"></div><br> <?php
 		case 1 : ?> <div id="chartContainer10" style="height: 300px; width:100%;"></div><br> <?php
-		default: echo "html 10 chart";
+		default: echo "";
 	} 
 ?>	
 
