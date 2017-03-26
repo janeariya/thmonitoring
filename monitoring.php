@@ -19,7 +19,7 @@
 	$objQuery = mysqli_query($condb,$strSQL);
 	$objResult = mysqli_fetch_array($objQuery);
 	
-	$numT = "SELECT workout.trainee_id,trainee.trainee_name,workout.trainee_hr FROM workout,trainee WHERE workout.trainee_id = trainee.trainee_id AND timestamp IN (SELECT MAX(timestamp) FROM workout WHERE trainee_id IN (SELECT trainee_id FROM trainerAndTrainee WHERE trainer_id = ".$_SESSION["user_id"].") group by trainee_id) order by trainee_id";
+	$numT = "SELECT workout.trainee_id,trainee.trainee_name,trainee.trainee_gender,floor(datediff(curdate(),trainee_birthdate) / 365) AS trainee_age,workout.trainee_hr FROM workout,trainee WHERE workout.trainee_id = trainee.trainee_id AND timestamp IN (SELECT MAX(timestamp) FROM workout WHERE  timestamp >= now() - interval 15 minute AND trainee_id IN (SELECT trainee_id FROM trainerAndTrainee WHERE trainer_id = ".$_SESSION["user_id"].") group by trainee_id) order by trainee_id";
 	$resultnumT = mysqli_query($condb, $numT);
 	$number = mysqli_num_rows($resultnumT);
 	//echo $number;
@@ -219,7 +219,7 @@ switch (numTrainee) {
 		}
 		
 		if(hr>maxHR){
-			alert("Trainee : " + name +  "\n heart rate exceeding maximum heart rate with : " + hr);
+			alert("Trainee : " + name +  "\n Heart rate exceeding maximum heart rate with : " + hr);
 		}
 		
 		if(hr >= (90/100)*maxHR){
@@ -265,7 +265,9 @@ switch (numTrainee) {
 
 
 <!-- End page content -->
+<!-- End page content -->
 
 <?php
 	include 'footpage.php';
 ?>
+
