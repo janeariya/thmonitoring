@@ -11,7 +11,7 @@
 	session_start();
 	include 'dbcon.php';
 	//trainee
-	$sql = "SELECT * FROM `trainerandtrainee` ";
+	$sql = "SELECT c.user_id, c.user_name, b.trainee_id, b.trainee_name FROM trainerandtrainee a INNER JOIN (user c, trainee b) ON (a.trainer_id = c.user_id AND a.trainee_id = b.trainee_id)";
 	$result = mysqli_query($condb, $sql);
 ?>
 
@@ -22,7 +22,9 @@
 		<table>
 		<tr>
 		<th>Trainer ID</th>
+		<th>Trainer Name</th>
 		<th>Trainee ID</th>
+		<th>Trainee Name</th>
 		<th>Action</th>
 		</tr>
 <?php
@@ -30,10 +32,12 @@
      	while($row = mysqli_fetch_assoc($result)) { 
 ?>
 			<tr>
-				<td><?php echo $row["trainer_id"]; ?></td>
+				<td><?php echo $row["user_id"]; ?></td>
+				<td><?php echo $row["user_name"]; ?></td>
 				<td><?php echo $row["trainee_id"]; ?></td>
+				<td><?php echo $row["trainee_name"]; ?></td>
 				<td>
-						<a href="JavaScript:if(confirm('Confirm Delete?')==true){window.location='admin_save_deleteMatch.php?trainer_id=<?php echo $row["trainer_id"];?>&trainee_id=<?php echo $row["trainee_id"];?>';}">Delete</a>
+						<a href="JavaScript:if(confirm('Confirm Delete?')==true){window.location='admin_save_deleteMatch.php?trainer_id=<?php echo $row["user_id"];?>&trainee_id=<?php echo $row["trainee_id"];?>';}">Delete</a>
 				</td>
 			</tr>
 <?php 		

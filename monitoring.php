@@ -43,6 +43,7 @@
 	var numArray = 0;
 	var numA1,numA2,numA3,numA4,numA5,numA6,numA7,numA8,numA9,numA10 ;
 	var traineeName = [];
+	var totalrow = numTrainee;
 	
 switch (numTrainee) {
   case 10:
@@ -177,6 +178,11 @@ switch (numTrainee) {
       		}).done(function(response) {
       			//console.log(response);
       			var json = JSON.parse(response);
+      			
+      			if(totalrow != json[pArr].row){
+      				totalrow = json[pArr].row;
+      				location.reload();
+      			}
       
 				//chart.options.title.text = "Trainee Name : " + json[pArr].trainee_name;
 				chart.subtitles[0].set("text","Trainee Name : " + json[pArr].trainee_name);
